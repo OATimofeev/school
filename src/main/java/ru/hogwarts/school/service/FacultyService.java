@@ -27,6 +27,10 @@ public class FacultyService {
         return facultyRepository.findById(id).orElse(null);
     }
 
+    public Faculty getByNameOrColor(String name, String color) {
+        return facultyRepository.findByNameContainingIgnoreCaseOrColorContainingIgnoreCase(name, color);
+    }
+
     public Faculty create(Faculty faculty) {
         faculty.setId(null);
         return facultyRepository.save(faculty);
@@ -45,5 +49,10 @@ public class FacultyService {
         Faculty deleted = get(id);
         facultyRepository.deleteById(id);
         return deleted;
+    }
+
+    public Collection<Student> getFacultyStudents(Long id) {
+        Faculty f = get(id);
+        return f == null ? null : f.getStudents();
     }
 }

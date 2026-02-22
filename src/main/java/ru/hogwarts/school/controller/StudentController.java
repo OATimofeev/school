@@ -3,8 +3,10 @@ package ru.hogwarts.school.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
+import ru.hogwarts.school.util.ResponseUtil;
 
 import java.util.Collection;
 
@@ -17,7 +19,7 @@ public class StudentController {
 
     @GetMapping("{id}")
     public ResponseEntity<Student> get(@PathVariable Long id) {
-        return prepareResponse(studentService.get(id));
+        return ResponseUtil.prepareResponse(studentService.get(id));
     }
 
     @GetMapping
@@ -25,14 +27,19 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAll(age));
     }
 
+    @GetMapping("/find")
+    public ResponseEntity<Collection<Student>> findByAgeBetween(@RequestParam(required = false) Integer min, @RequestParam(required = false) Integer max) {
+        return ResponseEntity.ok(studentService.getAllBetweenAge(min, max));
+    }
+
     @PostMapping
     public ResponseEntity<Student> create(@RequestBody Student student) {
-        return prepareResponse(studentService.create(student));
+        return ResponseUtil.prepareResponse(studentService.create(student));
     }
 
     @PutMapping
     public ResponseEntity<Student> edit(@RequestBody Student student) {
-        return prepareResponse(studentService.edit(student));
+        return ResponseUtil.prepareResponse(studentService.edit(student));
     }
 
     @DeleteMapping("{id}")
@@ -40,11 +47,9 @@ public class StudentController {
         return studentService.delete(id);
     }
 
-    private ResponseEntity<Student> prepareResponse(Student checked) {
-        if (checked == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(checked);
+    @GetMapping("/{id}/faculty")
+    public ResponseEntity<Faculty> getStudentFaculty(@PathVariable Long id) {
+        return ResponseUtil.prepareResponse(studentService.getStudentFaculty(id));
     }
 
 }

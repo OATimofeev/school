@@ -8,7 +8,6 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
-import java.util.HashMap;
 
 @Service
 public class StudentService {
@@ -18,6 +17,10 @@ public class StudentService {
 
     public Collection<Student> getAll(Integer age) {
         return studentRepository.getAllByAgeEquals(age);
+    }
+
+    public Collection<Student> getAllBetweenAge(Integer min, Integer max) {
+        return studentRepository.findByAgeBetween(min == null ? 0 : min, max == null ? 100 : max);
     }
 
     public Student get(Long id) {
@@ -42,5 +45,10 @@ public class StudentService {
         Student deleted = get(id);
         studentRepository.deleteById(id);
         return deleted;
+    }
+
+    public Faculty getStudentFaculty(Long id) {
+        Student s = get(id);
+        return s == null ? null : s.getFaculty();
     }
 }
