@@ -9,4 +9,6 @@ import java.util.Collection;
 public interface FacultyRepository extends JpaRepository<Faculty, Long> {
     @Query("SELECT f FROM Faculty f WHERE (:color IS NULL OR UPPER(f.color) = UPPER(:color))")
     Collection<Faculty> getAllByColorEqualsIgnoreCase(String color);
+
+    Faculty findByNameContainingIgnoreCaseOrColorContainingIgnoreCase(String name, String color);
 }
