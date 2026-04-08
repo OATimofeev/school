@@ -27,6 +27,18 @@ public class StudentService {
         return studentRepository.findById(id).orElse(null);
     }
 
+    public Integer getCount() {
+        return studentRepository.getCount();
+    }
+
+    public Double getAverageAge() {
+        return studentRepository.getAverageAge().orElse(0.0);
+    }
+
+    public Collection<Student> getLast5Students() {
+        return studentRepository.getLast5Students();
+    }
+
     public Student create(Student student) {
         student.setId(null);
         return studentRepository.save(student);
