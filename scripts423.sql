@@ -2,7 +2,7 @@ SELECT s.name,
        s.age,
        f.name as faculty
 FROM student s
-         FULL JOIN faculty f
+         JOIN faculty f
                    ON s.FACULTY_ID = f.ID;
 
 SELECT s.*
