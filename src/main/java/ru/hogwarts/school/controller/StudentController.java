@@ -52,4 +52,19 @@ public class StudentController {
         return ResponseUtil.prepareResponse(studentService.getStudentFaculty(id));
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<Integer> getStudentCount() {
+        return ResponseEntity.ok(studentService.getCount());
+    }
+
+    @GetMapping("/avgAge")
+    public ResponseEntity<Double> getStudentAverageAge() {
+        return ResponseEntity.ok(studentService.getAverageAge());
+    }
+
+    @GetMapping("/lastFive")
+    public ResponseEntity<Collection<Student>> getLast5Students() {
+        return ResponseEntity.ok(studentService.getLast5Students());
+    }
+
 }
