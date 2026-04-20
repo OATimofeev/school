@@ -15,6 +15,7 @@ public class Student {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(nullable = false)
     private String name;
     private Integer age;
 
