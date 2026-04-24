@@ -22,7 +22,7 @@ import java.util.Collection;
 @Service
 @Transactional
 @Slf4j
-public class AvatarService {
+public class InfoService {
 
     @Value("${avatars.dir.path}")
     private String avatarsDir;
@@ -30,7 +30,7 @@ public class AvatarService {
     private final StudentService studentService;
     private final AvatarRepository avatarRepository;
 
-    public AvatarService(StudentService studentService, AvatarRepository avatarRepository) {
+    public InfoService(StudentService studentService, AvatarRepository avatarRepository) {
         this.studentService = studentService;
         this.avatarRepository = avatarRepository;
     }
