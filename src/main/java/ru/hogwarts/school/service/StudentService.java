@@ -44,9 +44,19 @@ public class StudentService {
         return studentRepository.getAverageAge().orElse(0.0);
     }
 
+    public Double getAverageAgeByStreams() {
+        log.info("Was invoked NEW method for get average student's age");
+        return studentRepository.getAllByAgeEquals(null).stream().mapToDouble(Student::getAge).average().orElse(0.0);
+    }
+
     public Collection<Student> getLast5Students() {
         log.info("Was invoked method for get last 5 students");
         return studentRepository.getLast5Students();
+    }
+
+    public Collection<String> getNamesStartsWithLetter(String letter) {
+        log.info("Was invoked method for get students with name starts by letter = {}", letter);
+        return studentRepository.getAllByAgeEquals(null).stream().map(Student::getName).map(String::toUpperCase).filter(name -> name.startsWith(letter == null ? "A" : letter)).toList();
     }
 
     public Student create(Student student) {

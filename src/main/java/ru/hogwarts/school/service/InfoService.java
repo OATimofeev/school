@@ -18,6 +18,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -96,5 +97,11 @@ public class InfoService {
     private String getExtension(String fileName) {
         log.debug("Get extension for file {}", fileName);
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+
+    public Integer getSumOfMillionNums() {
+        log.info("Was invoked method for get sum of million numbers");
+        return Stream.iterate(1, a -> a + 1).limit(1_000_000).parallel().reduce(0, Integer::sum);
+
     }
 }

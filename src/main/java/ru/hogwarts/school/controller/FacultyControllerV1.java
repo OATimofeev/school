@@ -11,8 +11,8 @@ import ru.hogwarts.school.util.ResponseUtil;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("faculties")
-public class FacultyController {
+@RequestMapping("v1/faculties")
+public class FacultyControllerV1 {
 
     @Autowired
     private FacultyService facultyService;
